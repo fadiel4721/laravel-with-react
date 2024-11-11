@@ -8,4 +8,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::apiResource('/post', App\Http\Controllers\Api\PostController::class);
+Route::apiResource('/posts', App\Http\Controllers\Api\PostController::class);
+Route::apiResource('/pokemons', App\Http\Controllers\Api\PokemonController::class);
