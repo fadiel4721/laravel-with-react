@@ -39,10 +39,22 @@ class LoginController extends Controller
             ], 401);
         }
 
-        //if auth success
+        // Jika login berhasil, dapatkan informasi pengguna
+        $user = auth()->user(); // Mendapatkan pengguna yang sedang login
+
+        // Generate custom JWT token dengan menambahkan name dan email
+        $customClaims = [
+            'name'  => $user->name,
+            
+        ];
+
+        // Membuat JWT dengan custom claims
+        $token = JWTAuth::claims($customClaims)->fromUser($user);
+
+        //return response dengan token dan data pengguna
         return response()->json([
             'success' => true,
-            'user'    => auth()->user(),    
+            'user'    => $user,    
             'token'   => $token   
         ], 200);
     }
